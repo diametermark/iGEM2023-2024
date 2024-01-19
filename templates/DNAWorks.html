@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Primer</title>
+
+        <!--  CSS -->
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}">
+        <link href="{{ url_for('static', filename = 'css/style.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/ant-style.css')}}">
+
+        <!-- JS -->
+        <script src="{{ url_for('static', filename = 'js/jquery-3.5.1.js') }}"></script>
+
+        
+
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="padding-bottom: 0;">
+            <div class="container">
+            
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto left-aligned">
+            
+                        <!---- HOME ---->
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                
+                        <!---- TEAM ---->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="team" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Team
+                            </a>
+                        </li>
+                
+                        <!---- PROJECT ---->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Project
+                            </a>
+                        </li>
+                
+                        <!---- SAFETY ---->
+                        <li class="nav-item">
+                            <a class="nav-link" href="safety">Safety</a>
+                        </li>
+                
+                        <!---- HUMAN PRACTICES ---->
+                        <li class="nav-item">
+                            <a class="nav-link" style="padding-top: 0;" href="human-practices">Human Practices</a>
+                        </li>
+                
+                        <!---- AWARDS ---->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Awards
+                            </a>
+                        </li>
+            
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div class="board">
+  
+                <div class="row">
+                    <form action="/submit" method="post" target="_blank" id="primer_form">
+                        <div class="col">
+                            <h2 style="text-align: center; padding-top: 16px;">Primer Design</h2>
+                            <hr>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="TITLE">TITLE</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="title" id="title" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="EMAIL">EMAIL_ADDRESS</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="email" id="email" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <table style="border: 1px; text-align:center">
+                                <tbody>
+                                    <tr> 
+                                        <td class="help_link">
+                                            <p target="\&quot;_blank\&quot;">Choose a standard organism:</p> 
+                                        </td>
+                                    </tr>
+                                    <tr> 
+                                        <td>
+                                            <select name="codon_list" id="codon_list" size="5" style="background: white;">
+                                                <option value="ecoli2">E. coli class II</option>
+                                                <option value="h. sapiens">H. sapiens</option>
+                                                <option value="c. elegans">C. elegans</option>
+                                                <option value="d. melanogaster">D. melanogaster</option>
+                                                <option value="m. musculus">M. musculus</option>
+                                                <option value="p. pastoris">P. pastoris</option>
+                                                <option value="r. norvegicus">R. norvegicus</option>
+                                                <option value="s. cerevesiae">S. cerevesiae</option>
+                                                <option value="x. laevis">X. laevis</option>
+                                                <option value="e. coli">E. coli standard</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                                    
+                                </tbody>
+                            </table>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="ANNEALING_TEMPERATURE">ANNEALING_TEMPERATURE</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="temperature_range_from" id="temperature_range_from" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="temperature_range_to" id="temperature_range_to" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="OLIGO_LENGTH">OLIGO_LENGTH</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="length_range_from" id="length_range_from" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="length_range_to" id="length_range_to" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="checkbox" name="length_random" id="length_random" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="random">
+                                                <label for="length_random">random</label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="CODON_FREQUENCY_THRESHOLD">CODON_FREQUENCY_THRESHOLD</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="frequency_threshold" id="frequency_threshold" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="checkbox" name="freq_method" id="freq_random" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="random ">
+                                                <label for="length_random">random</label>
+                                            </span>
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="checkbox" name="freq_method" id="freq_strict" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="strict ">
+                                                <label for="length_random">strict</label>
+                                            </span>
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="checkbox" name="freq_method" id="freq_score" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="score">
+                                                <label for="length_random">score</label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="OLIGONUCLEOTIDE_CONCENTRATION">OLIGONUCLEOTIDE_CONCENTRATION</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="oligo" id="oligo" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="Na+/K+_CONCENTRATION">Na+/K+_CONCENTRATION</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="sodium" id="sodium" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="Mg2+_CONCENTRATION">Mg2+_CONCENTRATION</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="magnesium" id="magnesium" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="NUMBER_OF_SOLUTIONS">NUMBER_OF_SOLUTIONS</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="solutions" id="solutions" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="SEQUENCE">Enter sequence manually:</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <textarea form="[object Object]" placeholder="..." name="sequence" id="sequence" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="" cols="80" rows="4"></textarea>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="ant-row ant-form-item">
+                                <div class="ant-col ant-form-item-control-wrapper">
+                                    <div class="ant-form-item-control">
+                                        <span class="ant-form-item-children">
+                                            <div class="survey-footer">
+                                                <button type="submit" id="primer_submit" class="ant-btn Apply-button buttonPrimary btnPrimary">
+                                                    <span>提 交</span>
+                                                </button>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <script>
+            
+                        $(function(){
+                            $("#primer_form").submit(function(e){
+                                e.preventDefault();
+                                
+                                let title=$("#title").val();
+                                let email=$("#email").val();
+                                let temperature_range_from=$("#temperature_range_from").val();
+                                let temperature_range_to=$("#temperature_range_to").val();
+                                let length_range_from=$("#length_range_from").val();
+                                let length_range_to=$("#length_range_to").val();
+                                let frequency_threshold=$("#frequency_threshold").val();
+                                let oligo=$("#oligo").val();
+                                let sodium=$("#sodium").val();
+                                let magnesium=$("#magnesium").val();
+                                let solutions=$("#solutions").val();
+                                let length_random=$("#length_random").val();
+                                let freq_random=$("#freq_random").val();
+                                let freq_strict=$("#freq_strict").val();
+                                let freq_score=$("#freq_score").val();
+                                let freq_table=$("#codon_list").val();
+                                let sequence=$("#sequence").val();
+                                
+                                $.ajax({
+                                    url:"/submit",//要请求的服务器url
+                                    data:{
+                                        title : title,
+                                        email : email,
+                                        temperature_range_from : temperature_range_from,
+                                        temperature_range_to : temperature_range_to,
+                                        length_range_from : length_range_from,
+                                        length_range_to : length_range_to,
+                                        frequency_threshold : frequency_threshold,
+                                        oligo : oligo,
+                                        sodium : sodium,
+                                        magnesium : magnesium,
+                                        solutions : solutions,
+                                        length_random : length_random,
+                                        freq_random : freq_random,
+                                        freq_strict : freq_strict,
+                                        freq_score : freq_score,
+                                        freq_table : freq_table,
+                                        sequence : sequence
+                                    },
+                                    async:true,//是否是异步请求
+                                    cache:false,//是否缓存结果
+                                    type:"POST",//请求方式
+                                    success:function(result){//函数会在服务器执行成功后执行，result就是服务器返回结果
+                                        alert('提交成功!');		
+                                    },
+                                    error:function(jqXHR, textStatus, errorThrown) {
+                                        alert('提交失败!');
+                                    }
+                                });
+
+                                
+
+                            });
+                        });
+                    </script>
+                    
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

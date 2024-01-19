@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        
+        <title>PSSM</title>
+
+        <!--  CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.css') }}">
+        <link href="{{ url_for('static', filename = 'css/style.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/ant-style.css') }}">
+
+        <!-- JS -->
+        <script src="{{ url_for('static', filename = 'js/jquery-3.5.1.js') }}"></script>
+
+        
+
+    </head>
+
+    <body>
+        <div class="workland left-pic"></div>
+        <div class="workland right-pic"></div>
+        <div class="container">
+          <div class="board row">
+            <div class="card" style="width: 100%; margin: 0 auto;">
+                <form action="/PSSM-submit" method="post" target="_blank" id="PSSM_form" style="margin:2%">
+                  <div class="row">
+                    <div class="col input-box">
+                      <label for="name" class="input-label" title="Uniprot Searching">PSSM Grading</label>
+                      <div class="input">
+                        <textarea rows="3" cols="50" form="[object Object]" placeholder="Please input your protein sequence here" type="text" name="PSSM" id="PSSM" data-__meta="[object Object]" data-__field="[object Object]" value=""></textarea>
+                      </div>
+                    </div>
+                    <div class="col submit-box">
+                      <button type="submit" id="PSSM_submit" class="ant-btn Apply-button buttonPrimary btnPrimary">
+                        <span>submit</span>
+                      </button>
+                    </div>
+                  </div>
+    
+                  <div class="row">
+                    <iframe style="border: solid rgb(188,188,188) 2px; background-color: white; height: 30vh" src="" id="PSSM_output"></iframe>
+                    <a href="http://81.70.190.135:8080/PSSM_download" class="download-link">Download Result</a>
+                  </div>
+    
+                </form>
+                
+                <script>
+    
+                  var table = [];
+                  var i = 1;
+                  var text = document.getElementById('PSSM-out');
+                
+                  $(function(){
+                      $("#PSSM_form").submit(function(e){
+                          e.preventDefault();
+                          
+                          let PSSM=$("#PSSM").val();
+                          var loading=document.getElementById("loading");
+                          loading.removeAttribute('style');
+                          loading.setAttribute('style', 'visibility: visible;');
+                          
+                          $.ajax({
+                              url:"/PSSM-submit",//要请求的服务器url
+                              data:{
+                                  PSSM : PSSM
+                              },
+                              async:true,//是否是异步请求
+                              cache:false,//是否缓存结果
+                              type:"POST",//请求方式
+                              success:function(data){//函数会在服务器执行成功后执行，result就是服务器返回结果
+                                  //alert('submit successfully!');
+    
+                                  var loading=document.getElementById("loading");
+                                  loading.removeAttribute('style');
+                                  loading.setAttribute('style', 'visibility: hidden;');
+    
+                                  var iframe = document.getElementById('PSSM_output');
+                                  iframe.setAttribute("src", "../{{ url_for('static', filename = 'PSSM/result.txt') }}");
+                              },
+                              error:function(jqXHR, textStatus, errorThrown) {
+                                  alert('Failed!');
+                                  var loading=document.getElementById("loading");
+                                  loading.removeAttribute('style');
+                                  loading.setAttribute('style', 'visibility: hidden;');
+                              }
+                          });
+    
+                      });
+                  });
+    
+                </script>
+            </div>
+          </div>
+        </div>
+    </body>
+
+    <div class="cssloader" id="loading" style="visibility: hidden;">
+      <div class="sh1"></div>
+      <div class="sh2"></div>
+      <h4 class="lt">loading</h4>
+    </div>
+
+</html>

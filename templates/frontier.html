@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        
+        <title>workland</title>
+
+        <!--  CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.css') }}">
+        <link href="{{ url_for('static', filename = 'css/style.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/ant-style.css') }}">
+
+        <!-- JS -->
+        <script src="{{ url_for('static', filename = 'js/jquery-3.5.1.js') }}"></script>
+
+        
+
+    </head>
+
+    <body>
+      <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="padding-bottom: 0;">
+        <div class="container" style="margin-bottom: 0.5vw; justify-content: normal; max-width: 100%;">
+          <img class="navbar-brand ms-4" src="https://static.igem.wiki/teams/4659/wiki/team-logo1.png" width="70px" height="70px" alt="team logo">
+          <!---- TEAM NAME ---->
+          <a class="navbar-brand" href="#">USTC-Software</a>
+      
+          <!---- SMALL SCREEN MENU ICON ---->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto left-aligned" style="flex-grow: 0.43;">
+      
+              <!---- HOME ---->
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('home') }}" style="font-weight: bold;">Home</a>
+              </li>
+      
+              <!---- Protein Search ---->
+              <li class="nav-item">
+                <button class="nav-link" type="button" style="padding-top: 0;">Protein Search</button>
+              </li>
+
+              <!---- Multiple Sequence Alignment ---->
+              <li class="nav-item">
+                <button class="nav-link" type="button" style="padding-top: 0;">Multisequence Alignment</button>
+              </li>
+
+              <!---- Mutation site display ---->
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('jalview')}}" target="_blank" style="padding-top: 0;">Mutation site display</a>
+              </li>
+        
+              <!---- Mutation Site Prediction ---->
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 0;">
+                  Mutation Site Prediction
+                </a>
+      
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><button class="nav-link" type="button" style="padding-top: 0; color: black;">EVmutation</button></li>
+                  <li><a class="dropdown-item" style="text-align: center;" href="{{ url_for('PSSM') }}" target="_blank">PSSM</a></li>
+                </ul>
+              </li>
+        
+              <!---- Structure Prediction ---->
+              <li class="nav-item">
+                <button class="nav-link" type="button" style="padding-top: 0;">Structure Prediction</button>
+              </li>
+      
+              <!---- Codon optimization ---->
+              <li class="nav-item">
+                <button class="nav-link" type="button" style="padding-top: 0;">Codon optimization</a>
+              </li>
+      
+              <!---- Primer design ---->
+              <li class="nav-item">
+                <button class="nav-link" type="button" style="padding-top: 0;">Primer design</a>
+              </li>
+
+              <!---- Final result ---->
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('final')}}" target="_blank" style="padding-top: 0;">View Your Works</a>
+              </li>
+      
+            </ul>
+            
+          </div>
+        </div>
+      </nav>
+      
+      <script>
+        var nav_li = document.getElementsByClassName("nav-item");
+        for (let i = 1; i < nav_li.length; i++) {
+          if (i != 3) {
+            var button = nav_li[i].querySelector("button");
+            button.onclick = function() {
+              var url = window.location.pathname;
+              if (url == "") {
+                window.location.href = "{{ url_for('workland') }}";
+              }
+              var cards = document.getElementsByClassName("card");
+              var left = (i == 2) ? 112.5 * (i-1) * (-1) : 112.5 * (i-2) * (-1);
+
+              for (let j = 0; j < cards.length; j++) {
+                if (i == 1) left = 0;
+                cards[j].setAttribute("style", "left: "+left.toString()+"%;");
+              }
+            }
+          }
+        }
+      </script>
+
+      
+      
+      <div class="workland left-pic"></div>
+      <div class="workland right-pic"></div>
+      
+
+      <div class="container">
+        <div class="board row">
+          
+          <div class="card" id="standard">
+            <form action="/Uniprot-submit" method="post" target="_blank" id="uniprot_form" style="margin:2%">
+              <div class="row">
+                <div class="col input-box">
+                  <label for="name" class="input-label" title="Uniprot Searching">Uniprot Searching</label>
+                  <div class="input">
+                    <textarea rows="3" cols="50" form="[object Object]" placeholder="Please input your Uniprot ID here" type="text" name="Uniprot" id="Uniprot" data-__meta="[object Object]" data-__field="[object Object]" value=""></textarea>
+                  </div>
+                  <p style="margin-top: 60px;">if you don't have any idea, suggesting you to input 'GFP' (Green Fluorescent Protein)</p>
+                </div>
+                <div class="col submit-box">
+                  <button type="submit" id="Uniprot_submit" class="ant-btn Apply-button buttonPrimary btnPrimary">
+                    <span>submit</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="row" style="margin-top: 50px;">
+                <textarea rows="6" cols="60" name="uniprot-out" id="uniprot-out" readonly></textarea>
+                <button id="uni-pre" name="uni-pre" type="button" class="ant-btn buttonPrimary btnPrimary turnning turn-l">
+                  <span>last</span>
+                </button>
+                <a href="http://81.70.190.135:8080/Uniprot-out" class="download-link">Download Result</a>
+                <button id="uni-latter" name="uni-latter" type="button" class="ant-btn buttonPrimary btnPrimary turnning turn-r">
+                  <span>next</span>
+                </button>
+                
+              </div>
+
+              
+
+            </form>
+            
+            <script>
+
+              var table = [];
+              var i = 1;
+              var text = document.getElementById('uniprot-out');
+            
+              $(function(){
+                  $("#uniprot_form").submit(function(e){
+                      e.preventDefault();
+                      
+                      let Uniprot=$("#Uniprot").val();
+                      var loading=document.getElementById("loading");
+                      loading.removeAttribute('style');
+                      loading.setAttribute('style', 'visibility: visible;');
+                      
+                      $.ajax({
+                          url:"/Uniprot-submit",//要请求的服务器url
+                          data:{
+                              Uniprot : Uniprot
+                          },
+                          async:true,//是否是异步请求
+                          cache:false,//是否缓存结果
+                          type:"POST",//请求方式
+                          success:function(data){//函数会在服务器执行成功后执行，result就是服务器返回结果
+                              //alert('submit successfully!');
+
+                              var loading=document.getElementById("loading");
+                              loading.removeAttribute('style');
+                              loading.setAttribute('style', 'visibility: hidden;');
+
+                              table=data;
+                              console.log(data);
+                              console.log(table.length);
+                              text.innerHTML = table[1];
+                          },
+                          error:function(jqXHR, textStatus, errorThrown) {
+                              alert('Please enter correct Uniprot ID!');
+                              var loading=document.getElementById("loading");
+                              loading.removeAttribute('style');
+                              loading.setAttribute('style', 'visibility: hidden;');
+                          }
+                      });
+
+                  });
+              });
+
+              var btn1 = document.getElementById('uni-pre');
+              var btn2 = document.getElementById('uni-latter');
+              var i = 1;
+
+              
+              
+              btn1.onclick = function() {
+                i--;
+                console.log(i);
+                text.innerHTML = table[i];
+                if (i == 1) {
+                  document.getElementById('uni-pre').disabled = true;
+                  document.getElementById('uni-pre').setAttribute('style', 'opacity:0.6');
+                }
+                else {
+                  document.getElementById('uni-pre').disabled = false;
+                  document.getElementById('uni-pre').setAttribute('style', 'opacity:1');
+                }
+                if (i == table.length-1) {
+                  document.getElementById('uni-latter').disabled = true;
+                  document.getElementById('uni-latter').setAttribute('style', 'opacity:0.6');
+                }
+                else {
+                  document.getElementById('uni-latter').disabled = false;
+                  document.getElementById('uni-latter').setAttribute('style', 'opacity:1');
+                }
+              };
+              btn2.onclick = function() {
+                i++;
+                console.log(i);
+                text.innerHTML = table[i];
+                if (i == 1) {
+                  document.getElementById('uni-pre').disabled = true;
+                  document.getElementById('uni-pre').setAttribute('style', 'opacity:0.6');
+                }
+                else {
+                  document.getElementById('uni-pre').disabled = false;
+                  document.getElementById('uni-pre').setAttribute('style', 'opacity:1');
+                }
+                if (i == table.length-1) {
+                  document.getElementById('uni-latter').disabled = true;
+                  document.getElementById('uni-latter').setAttribute('style', 'opacity:0.6');
+                }
+                else {
+                  document.getElementById('uni-latter').disabled = false;
+                  document.getElementById('uni-latter').setAttribute('style', 'opacity:1');
+                }
+              };
+
+            </script>
+          </div>
+
+          <div class="card">
+            <form action="/Alignment-submit" method="post" enctype="multipart/form-data" target="_blank" id="alignment_form" style="margin:2%">
+              <div class="row">
+                <div class="col input-box">
+                  <label for="name" class="input-label" title="Multisequence Alignment">Multisequence Alignment</label>
+                  <div class="input" style="display: flex; align-items: center; flex-direction: column; padding-left: 0%;">
+                    <input class="upfile" type="file" id="Alignment-input" name="Alignment-input" accept=".txt, .fasta" style="position: absolute;" onchange="getFile(value)">
+                    <img src="{{ url_for('static', filename = 'pictures/upfile.svg') }}" style="height: 10%; width: 10%">
+                    <p id="fileupload" style="font-size: 1.25rem; line-height: 1.75rem; text-align: center;">Click to select files(Result of previous interface)</p>
+                  </div>
+                  
+                </div>
+                <div class="col submit-box">
+                  <button type="submit" id="Alignment_submit" class="ant-btn Apply-button buttonPrimary btnPrimary">
+                    <span>submit</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="row">
+                <textarea rows="10" cols="60" name="alignment-out" id="alignment-out" readonly></textarea>
+                <button id="align-pre" name="align-pre" type="button" class="ant-btn buttonPrimary btnPrimary turnning turn-l">
+                  <span>last</span>
+                </button>
+                <a href="http://81.70.190.135:8080/Alignment-out" class="download-link">Download Result</a>
+                <button id="align-latter" name="align-latter" type="button" class="ant-btn buttonPrimary btnPrimary turnning turn-r">
+                  <span>next</span>
+                </button>
+                
+              </div>
+
+            </form>
+
+            <script>
+              function getFile(value){
+                  // 获取上传控件dom
+                  var upload = document.getElementById('Alignment-input');
+                  // 获取文件名
+                  var fileName = upload.files[0].name;
+                  // 将文件名载入文本框
+                  document.getElementById('fileupload').innerHTML = fileName;
+
+              }
+            </script>
+
+            <script>
+
+              var table1 = [];
+              var i = 1;
+              var text1 = document.getElementById('alignment-out');
+
+              $(function(){
+                  $("#alignment_form").submit(function(e){
+                      e.preventDefault();
+                      
+                      var files = $('#Alignment-input').prop('files');
+                      var data = new FormData();
+                      data.append('Alignment-input', files[0]);
+                      
+                      var loading=document.getElementById("loading");
+                      loading.removeAttribute('style');
+                      loading.setAttribute('style', 'visibility: visible;');
+                      
+                      $.ajax({
+                          url:"/Alignment-submit",//要请求的服务器url
+                          data: data,
+                          async:true,//是否是异步请求
+                          cache:false,//是否缓存结果
+                          type:"POST",//请求方式
+                          contentType : false,
+                          processData : false,
+                          success:function(data){//函数会在服务器执行成功后执行，result就是服务器返回结果
+                              //alert('submit successfully!');
+
+                              var loading=document.getElementById("loading");
+                              loading.removeAttribute('style');
+                              loading.setAttribute('style', 'visibility: hidden;');
+
+                              table1=data;
+                              text1.innerHTML = table1[1];
+                          },
+                          error:function(jqXHR, textStatus, errorThrown) {
+                              alert('Failed!');
+                              var loading=document.getElementById("loading");
+                              loading.removeAttribute('style');
+                              loading.setAttribute('style', 'visibility: hidden;');
+                          }
+                      });
+
+                  });
+              });
+
+              var btn1 = document.getElementById('align-pre');
+              var btn2 = document.getElementById('align-latter');
+              var i = 1;
+
+              
+              
+              document.getElementById('align-pre').onclick = function() {
+                i--;
+                console.log(i);
+                text1.innerHTML = table1[i];
+                if (i == 1) {
+                  document.getElementById('align-pre').disabled = true;
+                  document.getElementById('align-pre').setAttribute('style', 'opacity:0.6');
+                }
+                else {
+                  document.getElementById('align-pre').disabled = false;
+                  document.getElementById('align-pre').setAttribute('style', 'opacity:1');
+                }
+                if (i == table1.length-1) {
+                  document.getElementById('align-latter').disabled = true;
+                  document.getElementById('align-latter').setAttribute('style', 'opacity:0.6');
+                }
+                else {
+                  document.getElementById('align-latter').disabled = false;
+                  document.getElementById('align-latter').setAttribute('style', 'opacity:1');
+                }
+              };
+              document.getElementById('align-latter').onclick = function() {
+                i++;
+                text1.innerHTML = table1[i];
+                if (i == 1) {
+                  document.getElementById('align-pre').disabled = true;
+                  document.getElementById('align-pre').setAttribute('style', 'opacity:0.6');
+                }
+                else {
+                  document.getElementById('align-pre').disabled = false;
+                  document.getElementById('align-pre').setAttribute('style', 'opacity:1');
+                }
+                if (i == table.length-1) {
+                  document.getElementById('align-latter').disabled = true;
+                  document.getElementById('align-latter').setAttribute('style', 'opacity:0.6');
+                }
+                else {
+                  document.getElementById('align-latter').disabled = false;
+                  document.getElementById('align-latter').setAttribute('style', 'opacity:1');
+                }
+              };
+
+            </script>
+            
+          </div>
+
+          <div class="card" id="EV">
+            <div class="row" style="width: 100%;">
+              <form action="/EV-submit" method="post" target="_blank" id="EV_form" style="margin: 2%;">
+
+                <div class="row">
+                  <div class="col input-box">
+                    <label for="name" class="input-label" title="SEQUENCE">Sequence of Protein</label>
+                    <div class="input">
+                      <textarea rows="3" cols="50" form="[object Object]" placeholder="Please input your protein sequences here(Sequence length should not be longer than 305)" type="text" name="EV_sequence" id="EV_sequence" data-__meta="[object Object]" data-__field="[object Object]" value=""></textarea>
+                    </div>
+                  </div>
+                  <div class="col submit-box">
+                    <button type="submit" id="Alignment_submit" class="ant-btn Apply-button buttonPrimary btnPrimary">
+                      <span>submit</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="row" style="min-height: 8vw; border: 2px solid black; margin: 0 2%; height: 10vw; overflow-y: scroll;">
+                  <a href="" id="EV-a" target="_blank" style="cursor: default;">
+                    <img class="EV-img" src="" id="EV-img"/>
+                  </a>
+                </div>
+
+                <div class="row">
+                  <p style="text-decoration: solid;">Possible Mutation Site Table</p>
+                  <table class="EVtable col">
+                    <thead>
+                      <tr>
+                        <th>rank</th>
+                        <th>pos</th>
+                        <th>origin</th>
+                        <th>to</th>
+                        <th>delta_E</th>
+                        <th>selected</th>
+                      </tr>
+                    </thead>
+                    <tbody id="EV-table1">
+
+                    </tbody>
+                  </table>
+
+                  <table class="EVtable col">
+                    <thead>
+                      <tr>
+                        <th>rank</th>
+                        <th>pos</th>
+                        <th>origin</th>
+                        <th>to</th>
+                        <th>delta_E</th>
+                        <th>selected</th>
+                      </tr>
+                    </thead>
+                    <tbody id="EV-table2">
+
+                    </tbody>
+                  </table>
+                  
+                </div>
+
+              </form>
+
+              <script>
+            
+                $(function(){
+                    $("#EV_form").submit(function(e){
+                        e.preventDefault();
+                        
+                        let EV_sequence=$("#EV_sequence").val();
+
+                        var loading=document.getElementById("loading");
+                        loading.removeAttribute('style');
+                        loading.setAttribute('style', 'visibility: visible;');
+                        
+                        $.ajax({
+                            url:"/EV-submit",//要请求的服务器url
+                            data:{
+                                EV_sequence : EV_sequence
+                            },
+                            async:true,//是否是异步请求
+                            cache:false,//是否缓存结果
+                            type:"POST",//请求方式
+                            dataType:"json",
+                            success:function(data){//函数会在服务器执行成功后执行，result就是服务器返回结果
+                                //alert('submit successfully!');
+
+                                var loading=document.getElementById("loading");
+                                loading.removeAttribute('style');
+                                loading.setAttribute('style', 'visibility: hidden;');
+
+                                var img = document.getElementById("EV-img");
+                                var a = document.getElementById("EV-a");
+                                img.removeAttribute('class');
+                                img.setAttribute('class', 'EV-img1');
+                                img.setAttribute('src', "../{{ url_for('static', filename = 'EVmutation/output.png') }}");
+                                a.removeAttribute('style');
+                                a.setAttribute('href', "../{{ url_for('static', filename = 'EVmutation/output.png') }}");
+
+                                
+                                var str="";
+                                for (var i = 0; i < 25; i++) {
+                                  str += "<tr><td>" + data[0][i].toString() + "</td><td>" + data[1][i].toString() + "</td><td>" + data[2][i] + "</td><td>" + data[3][i] + "</td><td>" + data[4][i] + 
+                                    "</td><td><input type='checkbox' class='EVselect' name='EV-select' value='" + data[1][i].toString() + "_" + data[2][i] + "_" + data[3][i] + "'></td></tr>";
+                                }
+                                var table=document.getElementById("EV-table1")
+                                table.innerHTML+=str;
+
+                                str=""
+                                for (var i = 25; i < 50; i++) {
+                                  str += "<tr><td>" + data[0][i].toString() + "</td><td>" + data[1][i].toString() + "</td><td>" + data[2][i] + "</td><td>" + data[3][i] + "</td><td>" + data[4][i] + 
+                                    "</td><td><input type='checkbox' class='EVselect' name='EV-select' value='" + data[1][i].toString() + "_" + data[2][i] + "_" + data[3][i] + "'></td></tr>";
+                                }
+                                var table=document.getElementById("EV-table2")
+                                table.innerHTML+=str;
+
+                                var selects = document.getElementsByClassName("EVselect");
+                                for (var j = 0; j < selects.length; j++) {
+                                  selects[j].onclick = function() {
+                                    var textarea = document.getElementById("EV_sequence");
+                                    var sequence = "";
+                                    var raw = textarea.value;
+                                    raw = raw.split('>')[1];
+                                    raw = raw.split('\n');
+                                    console.log(raw);
+                                    for (let i = 1; i < raw.length; i++) {
+                                      sequence += raw[i];
+                                    }
+                                    sequence = sequence.replaceAll('-', '');
+                                    for (let i = 0; i < selects.length; i++) {
+                                      if (selects[i].checked) {
+                                        var change = selects[i].value;
+                                        change = change.split('_');
+                                        str1 = sequence.substring(0, Number(change[0])-1);
+                                        str2 = sequence.substring(Number(change[0]));
+                                        sequence = str1 + change[2] + str2;
+                                      }
+                                    }
+
+                                    var Swiss = document.getElementById('SwissModel');
+                                    var Codon = document.getElementById('Codon_sequence');
+                                    Swiss.value = sequence;
+                                    Codon.value = sequence;
+                                  }
+                                }
+                                
+                            },
+                            error:function(jqXHR, textStatus, errorThrown) {
+                                alert('Failed!');
+                                var loading=document.getElementById("loading");
+                                loading.removeAttribute('style');
+                                loading.setAttribute('style', 'visibility: hidden;');
+                            }
+                        });
+
+                    });
+                });
+            </script>
+
+            </div>
+          </div>
+
+          <div class="card">
+            <form action="/SwissModel-submit" method="post" target="_blank" id="SwissModel_form" style="margin:2%">
+              
+              <div class="row">
+                <div class="col input-box" style="background-size: contain; height: 14vw; background-repeat: repeat-y">
+                  <label for="name" class="input-label" title="Structure Prediction">Structure Prediction</label>
+                  <div class="input">
+                    <textarea rows="3" cols="50" form="[object Object]" placeholder="Please input your protein serie here(One serie a time)" type="text" name="SwissModel" id="SwissModel" data-__meta="[object Object]" data-__field="[object Object]" value=""></textarea>
+                  </div>
+                  <p style="margin-top: 60px;">If you have used the Mutation Site Prediction, you can change your input accordingly checking the selected boxes. Or you can type your interested sequence here independently.</p>
+                </div>
+                <div class="col submit-box" style="margin-top: 50px;">
+                  <button type="submit" id="SwissModel_submit" class="ant-btn Apply-button buttonPrimary btnPrimary">
+                    <span>submit</span>
+                  </button>
+                </div>
+              </div>
+              
+
+            </form>
+
+            <a href="http://81.70.190.135:8080/SwissModel_download" class="download-link" name="swiss_a">Download Result</a>
+            <lable for="swiss_a" style="margin: 0 auto" id="swiss_lable"></lable>
+            
+            <script>
+            
+              $(function(){
+                  $("#SwissModel_form").submit(function(e){
+                      e.preventDefault();
+                      
+                      let SwissModel=$("#SwissModel").val();
+
+                      var loading=document.getElementById("loading");
+                      loading.removeAttribute('style');
+                      loading.setAttribute('style', 'visibility: visible;');
+                      
+                      $.ajax({
+                          url:"/SwissModel-submit",//要请求的服务器url
+                          data:{
+                              SwissModel : SwissModel
+                          },
+                          async:true,//是否是异步请求
+                          cache:false,//是否缓存结果
+                          type:"POST",//请求方式
+                          success:function(data){//函数会在服务器执行成功后执行，result就是服务器返回结果
+                              //alert('submit successfully!');
+                              
+                              var loading=document.getElementById("loading");
+                              loading.removeAttribute('style');
+                              loading.setAttribute('style', 'visibility: hidden;');
+
+                              var lable = document.getElementById("swiss_lable");
+                              lable.innerHTML="View your downloaded file on PyMOL!";
+                          },
+                          error:function(jqXHR, textStatus, errorThrown) {
+                              alert('Failed!');
+                              var loading=document.getElementById("loading");
+                              loading.removeAttribute('style');
+                              loading.setAttribute('style', 'visibility: hidden;');
+                          }
+                      });
+
+                  });
+              });
+            </script>
+          </div>
+          
+
+          <div class="card">
+            <div class="row" style="width: 100%;">
+              <form action="/codon-submit" method="post" target="_blank" id="codon_form" style="margin: 2%;">
+
+                <div class="row">
+                  <div class="col input-box">
+                    <label for="name" class="input-label" title="SEQUENCE for Codon">Sequence for Codon</label>
+                    <div class="input">
+                      <textarea rows="3" cols="50" form="[object Object]" placeholder="Place input your protein series here" type="text" name="Codon_sequence" id="Codon_sequence" data-__meta="[object Object]" data-__field="[object Object]" value=""></textarea>
+                    </div>
+                    <p style="margin-top: 60px;">If you have used the Mutation Site Prediction, you can change your input accordingly checking the selected boxes. Or you can type your interested sequence here independently.</p>
+                  </div>
+                  <div class="col">
+                    <div class="col" style="padding-top: 8%;">
+                      <p target="\&quot;_blank\&quot;" style="position: relative; left: 30%;">Choose a standard organism:</p> 
+                      <select name="codon_list" id="codon_list" style="background: white; position:  relative; left: 29%;" title="codon list">
+                        <option value="">--Please choose an option--</option>
+                        <option value="ecoli2">E. coli class II</option>
+                        <option value="h. sapiens">H. sapiens</option>
+                        <option value="c. elegans">C. elegans</option>
+                        <option value="d. melanogaster">D. melanogaster</option>
+                        <option value="m. musculus">M. musculus</option>
+                        <option value="p. pastoris">P. pastoris</option>
+                        <option value="r. norvegicus">R. norvegicus</option>
+                        <option value="s. cerevesiae">S. cerevesiae</option>
+                        <option value="x. laevis">X. laevis</option>
+                        <option value="e. coli">E. coli standard</option>
+                      </select>
+                      <div class="col submit-box">
+                        <button type="submit" id="Codon_submit" class="ant-btn Apply-button buttonPrimary btnPrimary">
+                          <span>submit</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </form>
+
+              <iframe style="border: solid rgb(188,188,188) 2px; background-color: white; height: 30vh; margin-top: 50px;" src="" id="DNAWorks_output"></iframe>
+              <a href="http://81.70.190.135:8080/Codon_download" class="download-link">Download Result</a>
+
+              <script>
+            
+                $(function(){
+                    $("#codon_form").submit(function(e){
+                        e.preventDefault();
+                        
+                        let Codon_sequence=$("#Codon_sequence").val();
+                        let Codon_type=$("#codon_list").val();
+
+                        var loading=document.getElementById("loading");
+                        loading.removeAttribute('style');
+                        loading.setAttribute('style', 'visibility: visible;');
+                        
+                        $.ajax({
+                            url:"/codon-submit",//要请求的服务器url
+                            data:{
+                                Codon_sequence : Codon_sequence,
+                                Codon_type : Codon_type
+                            },
+                            async:true,//是否是异步请求
+                            cache:false,//是否缓存结果
+                            type:"POST",//请求方式
+                            success:function(data){//函数会在服务器执行成功后执行，result就是服务器返回结果
+                                //alert('submit successfully!');
+
+                                var loading=document.getElementById("loading");
+                                loading.removeAttribute('style');
+                                loading.setAttribute('style', 'visibility: hidden;');
+
+                                var iframe = document.getElementById('DNAWorks_output');
+                                iframe.setAttribute("src", "../{{ url_for('static', filename = 'DNAWorks/output.txt') }}");
+                            },
+                            error:function(jqXHR, textStatus, errorThrown) {
+                                alert('Failed!');
+                                var loading=document.getElementById("loading");
+                                loading.removeAttribute('style');
+                                loading.setAttribute('style', 'visibility: hidden;');
+                            }
+                        });
+
+                    });
+                });
+              </script>
+            </div>
+          </div>
+          
+          <script>
+            
+            
+          </script>
+          
+
+          <div class="card">
+            <div class="row" style="width: 100%;">
+              <form action="/primer-submit" method="post" target="_blank" id="primer_form" style="margin: 2%; margin-top: 4%;">
+                <div class="row">
+                  <div class="col input-box">
+                    <label for="name" class="input-label" title="Primer SEQUENCE">SEQUENCE for Primer Design</label>
+                    <div class="input">
+                      <textarea rows="3" cols="50" form="[object Object]" placeholder="Please input your sequence for primer design here. (linear sequence beginning with your insertion position)" type="text" name="primer_sequence" id="primer_sequence" data-__meta="[object Object]" data-__field="[object Object]" value=""></textarea>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="col">
+                      <p target="\&quot;_blank\&quot;" style="position: relative; left: 30%;">Choose a standard vector:</p> 
+                      <select name="carrier_list" id="carrier_list" style="background: white; position:  relative; left: 29%;" title="vector list">
+                        <option value="">--Please choose an option--</option>
+                        <option value="0">PUC19 (E.coli)</option>
+                        <option value="1">pBIND (Mammlian)</option>
+                        <option value="2">pBEVY-GA (Yeast)</option>
+                        <option value="3">35S-eGFP-nosT (Plant)</option>
+                      </select>
+                      <div class="row" style="padding-top: 25px">
+                        <lable for="insertion" style="text-align: center;">Insert Position (position beginning with 0)</lable>
+                        <input type="number" id="insertion" name="insertion" maxlength="6" style="margin: 0 auto; width: 90px;">
+                      </div>
+                    </div>
+                    <div class="col submit-box">
+                      <button type="submit" id="primer_submit" class="ant-btn Apply-button buttonPrimary btnPrimary">
+                        <span>submit</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <div class="row">
+                <iframe style="border: solid rgb(188,188,188) 2px; background-color: white; height: 30vh" src="" id="primer_output"></iframe>
+                <button disabled id="pri-pre" name="pri-pre" type="button" class="ant-btn buttonPrimary btnPrimary turnning turn-l">
+                  <span>prev</span>
+                </button>
+                <a href="http://81.70.190.135:8080/Primer_download" class="download-link">Download Result</a>
+                <button disabled id="pri-latter" name="pri-latter" type="button" class="ant-btn buttonPrimary btnPrimary turnning turn-r">
+                  <span>next</span>
+                </button>
+              </div>
+              <script>
+                var i = 0;
+                var iframe = document.getElementById('primer_output');
+                var length = 0;
+                $(function(){
+                    
+                    $("#primer_form").submit(function(e){
+                        e.preventDefault();
+                        
+                        let primer_sequence=$("#primer_sequence").val();
+                        let carrier_item=$("#carrier_list").val();
+                        let carrier_pos=$("#insertion").val();
+
+                        var loading=document.getElementById("loading");
+                        loading.removeAttribute('style');
+                        loading.setAttribute('style', 'visibility: visible;');
+                        
+                        $.ajax({
+                            url:"/primer-submit",//要请求的服务器url
+                            data:{
+                                primer_sequence : primer_sequence,
+                                carrier_item : carrier_item,
+                                carrier_pos : carrier_pos
+                            },
+                            async:true,//是否是异步请求
+                            cache:false,//是否缓存结果
+                            type:"POST",//请求方式
+                            dataType:"json",
+                            success:function(data){//函数会在服务器执行成功后执行，result就是服务器返回结果
+                                //alert('submit successfully!');
+
+                                var loading=document.getElementById("loading");
+                                loading.removeAttribute('style');
+                                loading.setAttribute('style', 'visibility: hidden;');
+
+                                i = 0;
+                                if(data=="0") alert('Unable to design cloning primers! Please remodify your DNA sequence!');
+                                else if(data=="1")  alert('Standard vector\'s primers could not be designed at this site! Please replace your insertion site!');
+                                else  iframe.setAttribute("src", "../{{ url_for('static', filename = 'blast/final.txt') }}");
+                                
+                            },
+                            error:function(jqXHR, textStatus, errorThrown) {
+                                alert('Standard vector\'s primers could not be designed at this site! Please replace your insertion site!');
+                                var loading=document.getElementById("loading");
+                                loading.removeAttribute('style');
+                                loading.setAttribute('style', 'visibility: hidden;');
+                            }
+                        });
+
+                    });
+                });
+
+                var btn1 = document.getElementById('pri-pre');
+                var btn2 = document.getElementById('pri-latter');
+                var file = "../{{ url_for('static', filename = 'blast/output/primer/results0.txt') }}";
+                
+                btn1.onclick = function() {
+                  i--;
+                  file = "../static/blast/output/";
+                  if (document.getElementById("pri-choice1")) file += "carrier";
+                  else  file += "primer";
+                  file += "/results"+String(i)+".txt"
+                  iframe.setAttribute("src", file);
+                  if (i == 0) {
+                    document.getElementById('pri-pre').disabled = true;
+                    document.getElementById('pri-pre').setAttribute('style', 'opacity:0.6');
+                  }
+                  else {
+                    document.getElementById('pri-pre').disabled = false;
+                    document.getElementById('pri-pre').setAttribute('style', 'opacity:1');
+                  }
+                  if (i == table.length-1) {
+                    document.getElementById('pri-latter').disabled = true;
+                    document.getElementById('pri-latter').setAttribute('style', 'opacity:0.6');
+                  }
+                  else {
+                    document.getElementById('pri-latter').disabled = false;
+                    document.getElementById('pri-latter').setAttribute('style', 'opacity:1');
+                  }
+                };
+                btn2.onclick = function() {
+                  i++;
+                  file = "../static/blast/output/";
+                  if (document.getElementById("pri-choice1")) file += "carrier";
+                  else  file += "primer";
+                  file += "/results"+String(i)+".txt"
+                  iframe.setAttribute("src", file);
+                  if (i == 0) {
+                    document.getElementById('pri-pre').disabled = true;
+                    document.getElementById('pri-pre').setAttribute('style', 'opacity:0.6');
+                  }
+                  else {
+                    document.getElementById('pri-pre').disabled = false;
+                    document.getElementById('pri-pre').setAttribute('style', 'opacity:1');
+                  }
+                  if (i == length - 1) {
+                    document.getElementById('pri-latter').disabled = true;
+                    document.getElementById('pri-latter').setAttribute('style', 'opacity:0.6');
+                  }
+                  else {
+                    document.getElementById('pri-latter').disabled = false;
+                    document.getElementById('pri-latter').setAttribute('style', 'opacity:1');
+                  }
+                };
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rarrow" id="rarrow"></div>
+      <div class="larrow" id="larrow"></div>
+
+      <script>
+        var turnleft = document.getElementById("larrow");
+        var turnright = document.getElementById("rarrow");
+        var l = 0;
+        var card = document.getElementById("standard");
+        var standard = card.getAttribute("style");
+        
+        var cards = document.getElementsByClassName("card");
+
+        turnleft.onclick = function() {
+          standard = card.getAttribute("style");
+          if (standard) standard = standard.slice(6, -2);
+          cards = document.getElementsByClassName("card");
+          if (!standard || standard == "0")  { l = 0;  }
+          else  l = Number(standard) + 112.5;
+          
+          for (let j = 0; j < cards.length; j++) {
+            cards[j].removeAttribute("style");
+            cards[j].setAttribute("style", "left: "+l.toString()+"%;");
+          }
+        }
+
+        turnright.onclick = function() {
+          standard = card.getAttribute("style");
+          if (standard) standard = standard.slice(6, -2);
+          cards = document.getElementsByClassName("card");
+          if (standard == "-562.5")  { l = -562.5;  }
+          else if (!standard || standard == "0")  { l = -112.5;  }
+          else  { l = Number(standard) - 112.5;  }
+          for (let j = 0; j < cards.length; j++) {
+            cards[j].removeAttribute("style");
+            cards[j].setAttribute("style", "left: "+l.toString()+"%;");
+          }
+        }
+      </script>
+    </body>
+
+    <div class="cssloader" id="loading" style="visibility: hidden;">
+      <div class="sh1"></div>
+      <div class="sh2"></div>
+      <h4 class="lt">loading</h4>
+    </div>
+
+    
+
+</html>

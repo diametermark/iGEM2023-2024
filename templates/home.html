@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Home</title>
+
+        <!--  CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/ant-style.css') }}">
+
+        <!-- JS -->
+        <script src="{{ url_for('static', filename = 'js/jquery-3.5.1.js') }}"></script>
+
+    </head>
+
+    <body style="overflow: visible; position: relative; background-image: none; ">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="padding-bottom: 0;">
+            <div class="container" style="margin-bottom: 0.5vw; justify-content: normal; max-width: 100%;">
+              <img class="navbar-brand ms-4" src="https://static.igem.wiki/teams/4659/wiki/team-logo1.png" width="70px" height="70px" alt="team logo">
+              <!---- TEAM NAME ---->
+              <a class="navbar-brand" href="#">USTC-Software</a>
+          
+              <!---- SMALL SCREEN MENU ICON ---->
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+          
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto left-aligned" style="flex-grow: 0.43;">
+          
+                  <!---- HOME ---->
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('home') }}" style="font-weight: bold;">Home</a>
+                  </li>
+
+                  <!---- Protein Search ---->
+                  <li class="nav-item">
+                    <button class="nav-link" type="button" style="padding-top: 0;">Protein Search</button>
+                  </li>
+
+                  <!---- Multiple Sequence Alignment ---->
+                  <li class="nav-item">
+                    <button class="nav-link" type="button" style="padding-top: 0;">Multisequence Alignment</button>
+                  </li>
+
+                  <!---- Mutation site display ---->
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('jalview')}}" style="padding-top: 0;">Mutation site display</a>
+                  </li>
+          
+                  <!---- Mutation Site Prediction ---->
+                  <li class="nav-item">
+                    <button class="nav-link" type="button" style="padding-top: 0;">Mutation Site Prediction</button>
+                  </li>
+          
+                  <!---- Structure Prediction ---->
+                  <li class="nav-item">
+                    <button class="nav-link" type="button" style="padding-top: 0;">Structure Prediction</button>
+                  </li>
+          
+                  <!---- Codon optimization ---->
+                  <li class="nav-item">
+                    <button class="nav-link" type="button" style="padding-top: 0;">Codon optimization</button>
+                  </li>
+          
+                  <!---- Primer design ---->
+                  <li class="nav-item">
+                    <button class="nav-link" type="button" style="padding-top: 0;">Primer design</button>
+                  </li>
+          
+                </ul>
+                
+              </div>
+            </div>
+          </nav>
+          
+          <script>
+            var nav_li = document.getElementsByClassName("nav-item");
+            console.log(nav_li);
+            for (let i = 1; i < nav_li.length; i++) {
+              if (i != 3) {
+                var button = nav_li[i].querySelector(".nav-link");
+                button.onclick = function() {
+                  var url = window.location.pathname;
+                  url = url.substring(url.lastIndexOf('/')+1, url.length);
+                  if (url == "") {
+                      window.location.href = "{{ url_for('workland') }}";
+                  }
+                  var cards = document.getElementsByClassName("card");
+
+                  for (let j = 0; j < cards.length; j++) {
+                      var left = (i == 2) ? 112.5 * (i-1) * (-1) : 112.5 * (i-2) * (-1);
+                      cards[j].setAttribute("style", "left: "+left.toString()+"%");
+                  }
+                }
+              }
+            }
+          </script>
+        <div class="top" style="white-space: nowarp;">
+          <button type="button" id="start" style="background: url('../static/pictures/start.png'); background-size: cover; background-repeat: no-repeat; height: 250px; width: 250px; position: absolute; right: 20vw; bottom: 8vw; border: none;"></button>  
+        </div>
+        <script>
+          var button = document.getElementById("start");
+          button.onclick = function() {
+            window.location.href = "{{ url_for('workland') }}";
+          }
+        </script>
+        <div class="introduction">
+            <div class="container">
+                <div class="intro-box">
+                    <img src="../static/pictures/uniprot.png">
+                    <div class="intro">
+                        <h4>Uniport(Universal Protein Resource)</h4>
+                        <div>Uniprot is the best known protein sequence database with rich protein sequence information and annotation information. You can search by entering the name of the protein you are interested in or the Uniprot ID to get the sequence information of the protein.</div>
+                    </div>
+                </div>
+                <div class="intro-box" style="flex-direction: row-reverse;">
+                    <img src="../static/pictures/home-pic-1.png">
+                    <div class="intro">
+                        <h4>Jalview</h4>
+                        <div>Jalview is a program for editing, visualizing and analyzing multiple sequence comparisons. Sequences are analyzed using phylogenetic trees and principal component analysis (PCA) plots. You can import a FASTA file to see the degree of similarity of each locus, and visualize the degree of similarity and scoring of each locus with intuitive statistics to visualize the evolutionary homology between sequences and which loci are more conserved.</div>
+                    </div>
+                </div>
+                <div class="intro-box">
+                    <img src="../static/pictures/home-pic2-1.gif">
+                    <div class="intro">
+                        <h4>EVmutation</h4>
+                        <div>EVmutation is a unsupervised learningmodel focus on the optimization of protein sequence. For each amino-acid in each site, the model could calculates the energy of the sequence. Thus we can find sites and amino-acid that supports mutation.</div>
+                    </div>
+                </div>
+                <div class="intro-box" style="flex-direction: row-reverse;">
+                    <img src="../static/pictures/PSSM.png" style="height: 200px;">
+                    <div class="intro" style="height: 600px;">
+                        <h4>PSSM</h4>
+                        <div>PSSM is an analytical tool for protein mutation prediction that scores the specificity of a protein's position and then presents it in the form of a matrix to show the evolutionary conservation of the protein sequence. For an element Pij in PSSM, its value indicates the probability that the amino acid in the ith position of the sequence will mutate to the jth amino acid during the evolutionary process. For an element Pij in the PSSM, its value indicates the probability that the amino acid at position i of the sequence will be mutated to the jth amino acid during the evolutionary process, and if the value is positive, the higher the probability; vice versa, the lower the probability.</div>
+                    </div>
+                </div>
+                <div class="intro-box">
+                    <img src="../static/pictures/home-pic3.png">
+                    <div class="intro">
+                        <h4>Swiss-Model</h4>
+                        <div>Swiss-Model is a fully automated protein structure homology-modelling server. In structural biology, there is a fundamental principle: the higher the similarity in amino acid sequences of proteins, the more likely their structures will be similar. Based on this, Swiss-Model can predict the structure of proteins whose sequences are known by using proteins that have known sequences and known structures as references.</div>
+                    </div>
+                </div>
+                <div class="intro-box" style="flex-direction: row-reverse;">
+                    <img src="../static/pictures/home-pic4-2.gif">
+                    <div class="intro">
+                        <h4>Codon Optimization</h4>
+                        <div>Codon optimization is the most critical determinant of increasing protein expression. Through this step, we can maximize protein expression from the DNA seqeunce of the original species in the host by converting the DNA sequence. It is based on the frequency of the codon.</div>
+                    </div>
+                </div>
+                <div class="intro-box">
+                  <img src="../static/pictures/home-pic5.png">
+                  <div class="intro">
+                      <h4>Primer3</h4>
+                      <div>Primer3 evaluates the degree of match by calculating the complementary sequences between primers and templates and comparing the differences between these sequences. Based on this principle, Primer3 can quickly give you the primers you need for PCR based on the vector you choose, making it easy for you to proceed to the next step of synthesis.</div>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <footer>
+
+        </footer>
+    </body>
+    
+</html>

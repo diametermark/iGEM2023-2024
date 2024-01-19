@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        
+        <title>final</title>
+
+        <!--  CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.css') }}">
+        <link href="{{ url_for('static', filename = 'css/style.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/ant-style.css') }}">
+
+        <!-- JS -->
+        <script src="{{ url_for('static', filename = 'js/jquery-3.5.1.js') }}"></script>
+
+        
+
+    </head>
+
+    <body style="overflow: visible;">
+        <div class="container">
+
+            <div class="card">
+                <div class="name">Uniprot Searching</div>
+                <iframe style="border: solid rgb(188,188,188) 2px; background-color: white; height: 30vh" src="../{{ url_for('static', filename = 'Alignment/input.txt') }}"></iframe>
+            </div>
+
+            <div class="card">
+                <div class="name">Multisequence Alignment</div>
+                <iframe style="border: solid rgb(188,188,188) 2px; background-color: white; height: 30vh" src="../{{ url_for('static', filename = 'Alignment/output.txt') }}"></iframe>
+            </div>
+
+            <div class="card">
+                <div class="name">Mutation Site Prediction</div>
+                <div class="row" style="min-height: 8vw; border: 2px solid black; margin: 0 2%; ">
+                    <a href="../{{ url_for('static', filename = 'EVmutation/output.png') }}">
+                      <img class="EV-img1" src="../{{ url_for('static', filename = 'EVmutation/output.png') }}"/>
+                    </a>
+                  </div>
+  
+                  <div class="row">
+                    <p style="text-decoration: solid;">Possible Mutation Site Table</p>
+                    <a href="../{{ url_for('static', filename = 'EVmutation/output_table.png') }}">
+                      <img class="EV-img1" src="../{{ url_for('static', filename = 'EVmutation/output_table.png') }}"/>
+                    </a>
+                  </div>
+            </div>
+
+            <div class="card">
+                <div class="name">Codon optimization</div>
+                <iframe style="border: solid rgb(188,188,188) 2px; background-color: white; height: 30vh" src="../{{ url_for('static', filename = 'DNAWorks/output.txt') }}"></iframe>
+            </div>
+
+            <div class="card">
+                <div class="name">Primer Design</div>
+                <iframe style="border: solid rgb(188,188,188) 2px; background-color: white; height: 30vh" src="../{{ url_for('static', filename = 'blast/final.txt') }}"></iframe>
+            </div>
+
+        </div>
+    </body>
+</html>

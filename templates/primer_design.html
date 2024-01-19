@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Primer</title>
+
+        <!--  CSS -->
+        <link rel="stylesheet" href="{{url_for("static", filename="css/bootstrap.css")}}">
+        <link href="{{ url_for("static", filename = "css/style.css") }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{url_for("static", filename="css/ant-style.css")}}">
+
+        <!-- JS -->
+        <script src="{{ url_for('static', filename = 'js/jquery-3.5.1.js') }}"></script>
+
+        
+
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="padding-bottom: 0;">
+            <div class="container">
+            
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto left-aligned">
+            
+                        <!---- HOME ---->
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                
+                        <!---- TEAM ---->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="team" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Team
+                            </a>
+                        </li>
+                
+                        <!---- PROJECT ---->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Project
+                            </a>
+                        </li>
+                
+                        <!---- SAFETY ---->
+                        <li class="nav-item">
+                            <a class="nav-link" href="safety">Safety</a>
+                        </li>
+                
+                        <!---- HUMAN PRACTICES ---->
+                        <li class="nav-item">
+                            <a class="nav-link" style="padding-top: 0;" href="human-practices">Human Practices</a>
+                        </li>
+                
+                        <!---- AWARDS ---->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Awards
+                            </a>
+                        </li>
+            
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div class="board">
+  
+                <div class="row">
+                    <form action="/submit" method="post" target="_blank" id="primer_form">
+                        <div class="col">
+                            <h2 style="text-align: center; padding-top: 16px;">Primer Design</h2>
+                            <hr>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="SEQUENCE_ID">SEQUENCE_ID</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="id" id="id" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="SEQUENCE_TEMPLATE">SEQUENCE_TEMPLATE</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="template" id="template" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="PRIMER_TASK">PRIMER_TASK</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="task" id="task" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="PRIMER_PICK_LEFT_PRIMER">PRIMER_PICK_LEFT_PRIMER</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="left_primer" id="left_primer" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="PRIMER_PICK_INTERNAL_OLIGO">PRIMER_PICK_INTERNAL_OLIGO</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="internal_oligo" id="internal_oligo" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="PRIMER_PICK_RIGHT_PRIMER">PRIMER_PICK_RIGHT_PRIMER</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="right_primer" id="right_primer" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="PRIMER_OPT_SIZE">PRIMER_OPT_SIZE</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="opt_size" id="opt_size" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="PRIMER_MIN_SIZE">PRIMER_MIN_SIZE</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="min_size" id="min_size" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="PRIMER_MAX_SIZE">PRIMER_MAX_SIZE</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="max_size" id="max_size" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="PRIMER_PRODUCT_SIZE_RANGE">PRIMER_PRODUCT_SIZE_RANGE</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                from<input form="[object Object]" placeholder="..." type="text" name="range_from" id="range_from" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                            <br>
+                                            <span class="ant-form-item-children">
+                                                to<input form="[object Object]" placeholder="..." type="text" name="range_to" id="range_to" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col ant-form-item-label">
+                                        <label for="name" class="ant-form-item-required" title="PRIMER_EXPLAIN_FLAG">PRIMER_EXPLAIN_FLAG</label>
+                                    </div>
+                                    <div class="ant-col ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control has-success">
+                                            <span class="ant-form-item-children">
+                                                <input form="[object Object]" placeholder="..." type="text" name="explain_flag" id="explain_flag" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="ant-row ant-form-item">
+                                <div class="ant-col ant-form-item-control-wrapper">
+                                    <div class="ant-form-item-control">
+                                        <span class="ant-form-item-children">
+                                            <div class="survey-footer">
+                                                <button type="submit" id="primer_submit" class="ant-btn Apply-button buttonPrimary btnPrimary">
+                                                    <span>提 交</span>
+                                                </button>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <script>
+            
+                        $(function(){
+                            $("#primer_form").submit(function(e){
+                                e.preventDefault();
+                                
+                                let id=$("#id").val();
+                                let template=$("#template").val();
+                                let task=$("#task").val();
+                                let left_primer=$("#left_primer").val();
+                                let internal_oligo=$("#internal_oligo").val();
+                                let right_primer=$("#right_primer").val();
+                                let opt_size=$("#opt_size").val();
+                                let min_size=$("#min_size").val();
+                                let max_size=$("#max_size").val();
+                                let range_from=$("#range_from").val()
+                                let range_to=$("#range_to").val();
+                                let explain_flag=$("#explain_flag").val();
+                                
+                                $.ajax({
+                                    url:"/submit",//要请求的服务器url
+                                    data:{
+                                        id : id,
+                                        template : template,
+                                        task : task,
+                                        left_primer : left_primer,
+                                        internal_oligo : internal_oligo,
+                                        right_primer : right_primer,
+                                        opt_size : opt_size,
+                                        min_size : min_size,
+                                        max_size : max_size,
+                                        range_from : range_from,
+                                        range_to : range_to,
+                                        explain_flag : explain_flag
+                                    },
+                                    async:true,//是否是异步请求
+                                    cache:false,//是否缓存结果
+                                    type:"POST",//请求方式
+                                    success:function(result){//函数会在服务器执行成功后执行，result就是服务器返回结果
+                                        alert('提交成功!');		
+                                    },
+                                    error:function(jqXHR, textStatus, errorThrown) {
+                                        alert('提交失败!');
+                                    }
+                                });
+
+                                
+
+                            });
+                        });
+                    </script>
+                    
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
