@@ -1,0 +1,493 @@
+/* header */
+@font-face {
+    font-family: "page-header-title";
+    src: url("https://static.igem.wiki/teams/4659/wiki/archistico-bold.ttf");
+}
+
+.page-title {
+    text-align: center;
+    font-family: "page-header-title";
+}
+
+/* table */
+.EVtable {
+    text-align: center; 
+    margin-right: 2%; 
+    overflow-y: scroll;
+    max-height: 300px;
+    display: block;
+}
+
+table, th, td {
+    padding: 5px;
+    border: 1px solid black;
+    z-index: 4;
+}
+
+/** loader **/
+.cssloader {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    visibility: hidden;
+    background-color: rgb(51,51,51,0.6);
+}
+
+.sh1 {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 50px 50px 0 0;
+    border-color: #354952 transparent transparent transparent;
+    margin: 0 auto;
+    animation: shk1 1s ease-in-out infinite normal;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 50vh;
+  }
+  
+.sh2 {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 50px 50px;
+    border-color: transparent  transparent #df1a54 transparent ;
+    margin: -50px auto 0;
+    animation: shk2 1s ease-in-out infinite alternate;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 50vh;
+}
+
+/** animation starts here **/
+@keyframes shk1 {
+    0% {
+        transform: rotate(-360deg);
+    }  
+
+    100% {
+    }
+}
+
+@keyframes shk2 {
+    0% {
+        transform: rotate(360deg);
+    }
+    100% {
+    }
+}
+
+.lt {
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    margin: 30px auto;
+    text-align: center;
+    font-weight: 100;
+    letter-spacing: 10px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 54vh;
+}
+
+/* home page */
+.top {
+    height: 95vh;
+    width: 100%;
+    position: relative;
+    background-image: url('../pictures/platform.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.top .top-team {
+    position: relative;
+    height: 12%;
+    width: 50%;
+    margin: 27% auto;
+}
+
+.top .top-team .team-name {
+    position: absolute;
+    top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+    margin: auto;
+    text-align: center;
+}
+
+.top .top-title {
+    width: auto;
+    text-align: center;
+    position: relative;
+    margin: 0% auto;
+}
+
+.introduction {
+    width: 100%;
+    background-color: #fcf8ec;
+    background-repeat: no-repeat;
+}
+
+.introduction .container {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    padding-top: 100px;
+}
+
+.introduction .container .intro-box {
+    display: flex;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.introduction .container .intro-box img {
+    height: 300px;
+    width: 400px;
+    margin-right: 100px;
+    margin-left: 12%;
+}
+
+.introduction .container .intro-box .intro {
+    height: auto;
+    min-height: 470px;
+    width: 500px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
+.introduction .container .intro-box .intro h4 {
+    margin-top: 25%;
+    margin-left: 15%;
+}
+
+.introduction .container .intro-box .intro div {
+    margin-left: 13%;
+    width: 80%;
+    margin-top: 4%;
+}
+
+/* decration */
+.workland.left-pic {
+    position: absolute;
+    height: 24vw;
+    width: 24vw;
+    left: -7vw;
+    bottom: 0;
+    background-image: url(../pictures/back1.png);
+    background-size: cover;
+}
+
+.workland.right-pic {
+    position: absolute;
+    background-image: url(../pictures/back_dna.png);
+    background-size: cover;
+    width: 25%;
+    height: 25%;
+    right: -75px;
+    bottom: 0;
+    z-index: 0;
+    transform: rotate(-45deg);
+}
+
+.rarrow {
+    position: fixed;
+    right: 3%;
+    top: 50vh;
+    background-image: url(../pictures/rarrow.png);
+    background-size: cover;
+    height: 90px;
+    width: 100px;
+}
+
+.rarrow:hover {
+    cursor: pointer;
+}
+
+.larrow {
+    position: fixed;
+    left: 3%;
+    top: 50vh;
+    background-image: url(../pictures/larrow.png);
+    background-size: cover;
+    height: 90px;
+    width: 90px;
+}
+
+.larrow:hover {
+    cursor: pointer;
+}
+
+/* EV output */
+.EV-img {
+    background-image: url(../pictures/dna.png);
+    background-repeat: repeat-x;
+    background-size: 12vw;
+    width: 55%;
+    height: 100%;
+    margin: 0% 22.5%;
+    transition: all 1s ease-in;
+    animation: default-img 2s linear 0s infinite normal;
+}
+
+.EV-img1 {
+    overflow: scroll;
+    width: 100%;
+    height: 100%;
+    margin: 0% 0%;
+}
+
+@keyframes default-img {
+    0% {
+        rotate: x 0;
+    }
+    
+    100% {
+        rotate: x 360deg;
+    }
+}
+
+/* input texture */
+.col.input-box {
+    background-image: url(../pictures/textbox.svg);
+    background-size: cover;
+    height: 14vw;
+    width: 35vw;
+    background-repeat: no-repeat;
+    overflow: visible;
+}
+
+.col.input-box label {
+    padding-left: 40%;
+}
+
+.col.input-box .input {
+    position: relative;
+    padding-top: 8%;
+    padding-left: 11%;
+}
+
+.col.input-box .input .upfile {
+    opacity: 0;
+    width: 100%;
+    height: 90px;
+}
+
+.col.input-box .input .upfile:hover {
+    cursor: pointer;
+}
+
+.col.input-box textarea {
+    border-radius: 10px;
+}
+
+.col.submit-box {
+    display: flex;
+    align-items: center;
+}
+
+.col.submit-box button {
+    background-image: url(../pictures/button\(1\).png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+}
+.col.submit-box .upload {
+    background-image: url(../pictures/button\(1\).png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+    height: 30%;
+    width: 40%;
+    margin-left: 25%;
+}
+
+.card .row button {
+    background-image: url(../pictures/button\(1\).png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+}
+
+.card .row .turnning {
+    background-size: contain;
+    background-color: white;
+    font-size: 16px;
+    margin-top: 20px!important;
+    margin: 0 auto;
+    display: block;
+    height: 50px;
+    width: 180px;
+}
+
+.card .row .turnning.turn-l {
+    background-image: url(../pictures/button\(2\).png);
+    opacity: 0.6;
+}
+
+.card .row .turnning.turn-r {
+    background-image: url(../pictures/button\(1\).png);
+}
+
+.card .row .turnning.turn-r span {
+    display: flex;
+    padding-left: 60px;
+    padding-bottom: 18px;
+}
+
+.card .download-link {
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    border: solid;
+    width: 20%;
+    line-height: 50px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#EV {
+    margin-top: 0;
+}
+
+.pri-select {
+    visibility: hidden;
+}
+
+#pri-choice1:checked ~ #carrier_form,
+#pri-choice1:checked ~ #pri-out1,
+#pri-choice2:checked ~ #primer_form,
+#pri-choice2:checked ~ #pri-out2 {
+    visibility: visible;
+}
+
+
+/* layout and body */
+body {
+    padding-top: 56px;
+    background-color: rgba(148,187,233,0);
+    width: 100%;
+    height: 96vw;
+    
+    overflow: hidden;
+}
+
+.board {
+    margin-top: 8vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    /*align-items: center;*/
+    width: 100%;
+    /* overflow: hidden; */
+    padding-bottom: 100px;
+}
+
+.title2 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 32px;
+    margin-top: 80px;
+}
+
+.anchor {
+    position: relative;
+    top: -80px;
+    display: block;
+    height: 60px;
+}
+
+
+
+.container .board .card {
+    left: 0;
+    position: relative;
+    box-sizing: content-box;
+    width: 90%;
+    min-width: 90%;
+    margin-left: 6%;
+    margin-right: 15%;
+    display: flex;
+    flex-direction: column;
+    background: none;
+    border: 2px solid #E1DDD0;
+    border-radius: 30px;
+    transition: left 1s;
+}
+
+.card .name {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 30px;
+    color: black;
+}
+
+
+
+.left-aligned { margin-left: auto; }
+.bg-dark { background-color: #343a40 !important; }
+.bg-hero { background-color: #45b06cff; }
+
+/* CALLOUT */
+.bd-callout { padding:1.25rem; margin-top:1.25rem; margin-bottom:1.25rem; border:1px solid #e9ecef; border-left-width:.25rem; border-radius:.25rem }
+.bd-callout h4 { margin-bottom:.25rem; font-family: Arial, Helvetica, sans-serif;}
+.bd-callout p:last-child { margin-bottom:0; font-family:'Times New Roman', Times, serif}
+.bd-callout code { border-radius:.25rem }
+.bd-callout+.bd-callout { margin-top:-.25rem }
+.bd-callout-info { border-left-color:#4eb7d6 }
+.bd-callout-warning { border-left-color:#f0ad4e }
+.bd-callout-danger { border-left-color:#d9534f }
+
+/* nav */
+.navbar {
+    height: 70px;
+    background-color: #5519FF;
+    background-size: 100% 40vw;
+}
+
+.nav-item {
+    padding:auto;
+    margin: auto;
+}
+
+.nav-link {
+    color: white; 
+    height: 50px;
+    width: 100%;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+.navbar .container .navbar-nav .nav-item {
+    text-align: center;
+    overflow: visible;
+}
+
+.navbar .container .navbar-nav li.nav-item {
+    width: 8.5vw;
+    margin: 1%;
+}
+
+li.nav-item.dropdown > ul.dropdown-menu {
+    display: none;
+}
+
+li.nav-item.dropdown:hover ul.dropdown-menu {
+    display: block;
+    text-decoration: underline;
+}
