@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Mutation Site Display</title>
-        <script src="{{ url_for('static', filename = 'jalview/swingjs/swingjs2.js') }}"></script> <!-- import and execute JalviewJS's SwingJS bootstrap -->
+        <script src="../static/jalview/swingjs/swingjs2.js"></script>
+        <!-- <script src="{{ url_for('static', filename = 'jalview/swingjs/swingjs2.js') }}"></script> --> <!-- import and execute JalviewJS's SwingJS bootstrap -->
         <script>
             // boilerplate warning in case the bootstrap wasn't found 
             if (!self.SwingJS)alert('swingjs2.js was not found. It needs to be in swingjs folder in the same directory as ' + document.location.href)
@@ -22,7 +23,8 @@
                height: 550,
                readyFunction: null, // called once the app is finished
                serverURL: 'https://chemapps.stolaf.edu/jmol/jsmol/php/jsmol.php',
-               j2sPath: '../{{ url_for('static', filename = 'jalview/swingjs/j2s') }}', 
+               j2sPath: '../static/jalview/swingjs/j2s',
+               //j2sPath: '../{{ url_for('static', filename = 'jalview/swingjs/j2s') }}', 
                console:'sysoutdiv', // div for stdout and stderr log
                allowjavascript: true
             }

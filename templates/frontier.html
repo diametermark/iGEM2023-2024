@@ -9,14 +9,18 @@
         <title>workland</title>
 
         <!--  CSS -->
-        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.css') }}">
-        <link href="{{ url_for('static', filename = 'css/style.css') }}" rel="stylesheet">
-        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/ant-style.css') }}">
+        <link rel="stylesheet" href="../static/css/bootstrap.css">
+        <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}"> -->
+        <link href="../static/css/style.css" rel="stylesheet">
+        <!-- <link href="{{ url_for('static', filename = 'css/style.css') }}" rel="stylesheet"> -->
+        <link rel="stylesheet" href="../static/css/ant-style.css">
+        <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/ant-style.css')}}"> -->
 
         <!-- JS -->
-        <script src="{{ url_for('static', filename = 'js/jquery-3.5.1.js') }}"></script>
+        <script src="../static/js/jquery-3.5.1.js"></script>
+        <!-- <script src="{{ url_for('static', filename = 'js/jquery-3.5.1.js') }}"></script> -->
 
-        
+        <!-- 以上对css及js文件的引用均为本地引用，而注释掉的部分为网页相对寻址引用，用于服务器中 -->
 
     </head>
 
@@ -37,8 +41,8 @@
       
               <!---- HOME ---->
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('home') }}" style="font-weight: bold;">Home</a>
-              </li>
+                <a class="nav-link" href="./home.html" style="font-weight: bold;">Home</a>
+              </li>     <!-- 相对寻址写法   href="{{ url_for('home') }}"    其中url_for内链接名称取决于你在Flask中定义的app.route下的函数名 -->
       
               <!---- Protein Search ---->
               <li class="nav-item">
@@ -52,7 +56,7 @@
 
               <!---- Mutation site display ---->
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('jalview')}}" target="_blank" style="padding-top: 0;">Mutation site display</a>
+                <a class="nav-link" href="./jalview.html" target="_blank" style="padding-top: 0;">Mutation site display</a>
               </li>
         
               <!---- Mutation Site Prediction ---->
@@ -63,7 +67,7 @@
       
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><button class="nav-link" type="button" style="padding-top: 0; color: black;">EVmutation</button></li>
-                  <li><a class="dropdown-item" style="text-align: center;" href="{{ url_for('PSSM') }}" target="_blank">PSSM</a></li>
+                  <li><a class="dropdown-item" style="text-align: center;" href="./PSSM.html" target="_blank">PSSM</a></li>
                 </ul>
               </li>
         
@@ -84,7 +88,7 @@
 
               <!---- Final result ---->
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('final')}}" target="_blank" style="padding-top: 0;">View Your Works</a>
+                <a class="nav-link" href="./final.html" target="_blank" style="padding-top: 0;">View Your Works</a>
               </li>
       
             </ul>
@@ -92,8 +96,11 @@
           </div>
         </div>
       </nav>
-      
-      <script>
+
+      <!-- 横向排列card类，使页面内容溢出屏幕外。body的overflow设为hidden以隐藏溢出部分，使得可见内容仅限屏幕内 -->
+      <!-- 在导航栏定位按钮被按下后，通过同步修改所有card类元素的实体的left值，实现页面重定位 -->
+      <!-- 延时滑动效果由transition属性控制缓变延迟 -->
+      <script>    
         var nav_li = document.getElementsByClassName("nav-item");
         for (let i = 1; i < nav_li.length; i++) {
           if (i != 3) {
@@ -182,14 +189,14 @@
                           type:"POST",//请求方式
                           success:function(data){//函数会在服务器执行成功后执行，result就是服务器返回结果
                               //alert('submit successfully!');
-
+                              // 服务器返回后，设置加载画面为hidden
                               var loading=document.getElementById("loading");
                               loading.removeAttribute('style');
                               loading.setAttribute('style', 'visibility: hidden;');
 
                               table=data;
-                              console.log(data);
-                              console.log(table.length);
+                              //console.log(data);
+                              //console.log(table.length);
                               text.innerHTML = table[1];
                           },
                           error:function(jqXHR, textStatus, errorThrown) {
@@ -207,8 +214,8 @@
               var btn2 = document.getElementById('uni-latter');
               var i = 1;
 
-              
-              
+              // 设置pre、next按钮，用于变换显示输出内容
+              // 当处于首条或尾条输出时，分别disable pre和next按钮
               btn1.onclick = function() {
                 i--;
                 console.log(i);
@@ -262,7 +269,8 @@
                   <label for="name" class="input-label" title="Multisequence Alignment">Multisequence Alignment</label>
                   <div class="input" style="display: flex; align-items: center; flex-direction: column; padding-left: 0%;">
                     <input class="upfile" type="file" id="Alignment-input" name="Alignment-input" accept=".txt, .fasta" style="position: absolute;" onchange="getFile(value)">
-                    <img src="{{ url_for('static', filename = 'pictures/upfile.svg') }}" style="height: 10%; width: 10%">
+                    <img src="../static/pictures/upfile.svg" style="height: 10%; width: 10%">
+                    <!-- <img src="{{ url_for('static', filename = 'pictures/upfile.svg') }}" style="height: 10%; width: 10%"> -->
                     <p id="fileupload" style="font-size: 1.25rem; line-height: 1.75rem; text-align: center;">Click to select files(Result of previous interface)</p>
                   </div>
                   
@@ -489,6 +497,7 @@
                                 loading.removeAttribute('style');
                                 loading.setAttribute('style', 'visibility: hidden;');
 
+                                // 服务器返回数据后，更新热图及表单
                                 var img = document.getElementById("EV-img");
                                 var a = document.getElementById("EV-a");
                                 img.removeAttribute('class');
@@ -514,6 +523,7 @@
                                 var table=document.getElementById("EV-table2")
                                 table.innerHTML+=str;
 
+                                // 根据选择框的勾选，同步更新SwissModel及CodonOptimiation的输入（有bug，现只能修改单个勾选，多个勾选需设置条件判断）
                                 var selects = document.getElementsByClassName("EVselect");
                                 for (var j = 0; j < selects.length; j++) {
                                   selects[j].onclick = function() {
@@ -522,7 +532,7 @@
                                     var raw = textarea.value;
                                     raw = raw.split('>')[1];
                                     raw = raw.split('\n');
-                                    console.log(raw);
+                                    //console.log(raw);
                                     for (let i = 1; i < raw.length; i++) {
                                       sequence += raw[i];
                                     }
@@ -877,6 +887,7 @@
       <div class="rarrow" id="rarrow"></div>
       <div class="larrow" id="larrow"></div>
 
+      <!-- 通过左右箭头进行工作区切换 -->
       <script>
         var turnleft = document.getElementById("larrow");
         var turnright = document.getElementById("rarrow");
@@ -914,6 +925,7 @@
       </script>
     </body>
 
+    <!-- 加载效果 -->
     <div class="cssloader" id="loading" style="visibility: hidden;">
       <div class="sh1"></div>
       <div class="sh2"></div>

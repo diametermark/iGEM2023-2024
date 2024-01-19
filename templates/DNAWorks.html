@@ -7,14 +7,18 @@
         <title>Primer</title>
 
         <!--  CSS -->
-        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}">
-        <link href="{{ url_for('static', filename = 'css/style.css') }}" rel="stylesheet">
-        <link rel="stylesheet" href="{{url_for('static', filename='css/ant-style.css')}}">
+        <link rel="stylesheet" href="../static/css/bootstrap.css">
+        <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}"> -->
+        <link href="../static/css/style.css" rel="stylesheet">
+        <!-- <link href="{{ url_for('static', filename = 'css/style.css') }}" rel="stylesheet"> -->
+        <link rel="stylesheet" href="../static/css/ant-style.css">
+        <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/ant-style.css')}}"> -->
 
         <!-- JS -->
-        <script src="{{ url_for('static', filename = 'js/jquery-3.5.1.js') }}"></script>
+        <script src="../static/js/jquery-3.5.1.js"></script>
+        <!-- <script src="{{ url_for('static', filename = 'js/jquery-3.5.1.js') }}"></script> -->
 
-        
+        <!-- 以上对css及js文件的引用均为本地引用，而注释掉的部分为网页相对寻址引用，用于服务器中 -->
 
     </head>
 
@@ -28,12 +32,12 @@
             
                         <!---- HOME ---->
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
+                            <a class="nav-link" href="home.html">Home</a>  
+                        </li>       
                 
                         <!---- TEAM ---->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="team" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Team
                             </a>
                         </li>
@@ -52,7 +56,7 @@
                 
                         <!---- HUMAN PRACTICES ---->
                         <li class="nav-item">
-                            <a class="nav-link" style="padding-top: 0;" href="human-practices">Human Practices</a>
+                            <a class="nav-link" style="padding-top: 0;" href="#">Human Practices</a>
                         </li>
                 
                         <!---- AWARDS ---->
